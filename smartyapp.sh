@@ -64,14 +64,17 @@ setup_smarty() {
 			if [ -d ./smarty_tpls/$smarty_dir ]; then
 				#it was successfully created -- or exists
 				echo "Directory $smarty_dir found..."
-				if [ "$smarty_dir"="${SMARTY_DIRS[0]}" ]; then
+				if [ "$smarty_dir"="cache" ]; then
 					#it's the cache directory
 					echo "Changing permissions on the $smarty_dir directory..."
-					chmod 777 ./smarty_tpls/$smarty_dir
-				elif [ "$smarty_dir"="${SMARTY_DIRS[3]}" ]; then
+					chmod -R 777 ./smarty_tpls/$smarty_dir
+				elif [ "$smarty_dir"="templates_c" ]; then
 					#the templates_c directory
 					echo "Changing permissions on the $smarty_dir directory..."
-					chmod 777 ./smarty_tpls/$smarty_dir
+					chmod -R 777 ./smarty_tpls/$smarty_dir
+				else
+					#for other directories
+					chmod -R 644 ./smarty_tpls/$smarty_dir
 				fi
 			else
 				#not found
