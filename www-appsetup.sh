@@ -27,8 +27,8 @@ set_permissions() {
 		echo "Switching to directory $app_directory"
 		cd $app_directory
 	fi
-	if [[ -f "./index.php" || -f "./index.html" ]]; then
-		#it's a project's web root
+	if [[ -f "./index.php" || -f "./index.html" || -d "./html" ]]; then
+		# it's a project's web root
 		chown -R $USER:www .
 		find . -type f -exec chmod 644 {} \;
 		find . -type d -exec chmod 750 {} \;
