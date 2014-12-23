@@ -35,15 +35,9 @@ set_permissions() {
 		
 		find . -type d -name "*upload*" -exec chmod -R 777 {} \;
 		#specifically for upload directories -- changes permissions on all directories with upload in their name
-	
-		if [ -d "./smarty_tpls/cache" ]; then
-			echo "Making cache directory writable..."
-			chmod -R 777 "./smarty_tpls/cache"
-		fi
-		if [ -d "./smarty_tpls/templates_c" ]; then
-			echo "Making templates_c directory writable..."
-			chmod -R 777 "./smarty_tpls/templates_c"
-		fi
+		find . -type d -path "*/smarty_tpls/cache" -exec chmod -R 777 {} \;
+		find . -type d -path "*/smarty_tpls/templates_c" -exec chmod -R 777 {} \;
+		#specifically set the permissions on smarty folders
 	else
 		echo "This doesn't seem to be the root of a project -- Exiting..."
 		exit 1
