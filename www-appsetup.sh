@@ -32,9 +32,11 @@ set_permissions() {
 		chown -R $USER:www .
 		find . -type f -exec chmod 644 {} \;
 		find . -type d -exec chmod 750 {} \;
-		
+
 		find . -type d -name "*upload*" -exec chmod -R 777 {} \;
 		#specifically for upload directories -- changes permissions on all directories with upload in their name
+		find . -type d -path "*/tmp" -exec chmod -R 770 {} \;
+		# for temporary directories -- if found
 		find . -type d -path "*/smarty_tpls/cache" -exec chmod -R 777 {} \;
 		find . -type d -path "*/smarty_tpls/templates_c" -exec chmod -R 777 {} \;
 		#specifically set the permissions on smarty folders
@@ -59,7 +61,7 @@ if [ $argv -ge 1 ]; then
 		show_help
 	fi
 	app_directory=$1
-	#if an argument is supplied -- set the value to the argument	
+	#if an argument is supplied -- set the value to the argument
 fi
 if [ ! $app_directory == "/" ]; then
 	echo 'Starting WWW-AppSetup script...'
