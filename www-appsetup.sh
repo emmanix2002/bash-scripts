@@ -29,7 +29,7 @@ set_permissions() {
 	fi
 	if [[ -f "./index.php" || -f "./index.html" || -d "./html" ]]; then
 		# it's a project's web root
-		chown -R $USER:www .
+		chown -R $USER:www-data .
 		find . -type f -exec chmod 644 {} \;
 		find . -type d -exec chmod 750 {} \;
 
