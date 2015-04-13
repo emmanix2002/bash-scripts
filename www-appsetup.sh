@@ -27,9 +27,12 @@ set_permissions() {
 		echo "Switching to directory $app_directory"
 		cd $app_directory
 	fi
-	if [[ -f "./index.php" || -f "./index.html" || -d "./html" ]]; then
+	html_directories=$(find . -type d -path "*html" | wc -l)
+	if [[ -f "./index.php" || -f "./index.html" || -d "./html" || $html_directories -gt 0 ]]; then
 		# it's a project's web root
-		chown -R $USER:www-data .
+		echo "Changing ownership..."
+		chown -R $USER:www .
+		echo "Changing file and directory permissions..."
 		find . -type f -exec chmod 644 {} \;
 		find . -type d -exec chmod 750 {} \;
 
