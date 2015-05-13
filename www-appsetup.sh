@@ -31,7 +31,7 @@ set_permissions() {
 	if [[ -f "./index.php" || -f "./index.html" || -d "./html" || $html_directories -gt 0 ]]; then
 		# it's a project's web root
 		echo "Changing ownership..."
-		chown -R $USER:www .
+		chown -R $USER:www-data .
 		echo "Changing file and directory permissions..."
 		find . -type f -exec chmod 644 {} \;
 		find . -type d -exec chmod 750 {} \;
