@@ -16,6 +16,7 @@ show_help() {
 
 set_permissions() {
 	app_directory=$1
+	username=$2
 	current_working_directory=`pwd`
 	if [ ! -d $app_directory ]; then
 		#directory does not exist
@@ -31,7 +32,7 @@ set_permissions() {
 	if [[ -f "./index.php" || -f "./index.html" || -d "./html" || $html_directories -gt 0 ]]; then
 		# it's a project's web root
 		echo "Changing ownership..."
-		chown -R $USER:www-data .
+		chown -R $username:www-data .
 		echo "Changing file and directory permissions..."
 		find . -type f -exec chmod 644 {} \;
 		find . -type d -exec chmod 755 {} \;
@@ -55,6 +56,7 @@ set_permissions() {
 
 argv=$#
 #get the number of supplied arguments
+username=$USER
 app_directory=`pwd`
 #sets a default value for the app_directory
 if [ $argv -ge 1 ]; then
@@ -65,10 +67,14 @@ if [ $argv -ge 1 ]; then
 	fi
 	app_directory=$1
 	#if an argument is supplied -- set the value to the argument
+	if [ $argv -ge 2 ]; then
+		# we set a different username than the assumed if provided
+		username=$2
+	fi
 fi
 if [ ! $app_directory == "/" ]; then
 	echo 'Starting WWW-AppSetup script...'
-	set_permissions $app_directory
+	set_permissions $app_directory $username
 else
 	echo "You shouldn't run this command from the FileSystem root...Go somewhere else!!"
 	exit 1
