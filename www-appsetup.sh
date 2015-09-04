@@ -1,9 +1,9 @@
 #!/bin/bash
 #It's important that you navigate to this project's directory before running the setup script
 show_help() {
-	echo "Usage: www-appsetup [-h|--help] path"
+	echo "Usage: www-appsetup [-h|--help] path [LOGIN]"
 	echo ""
-	echo "It changes the user/group permissions for a web project; The directory must have a root index.php file"
+	echo "It changes the user/group permissions for a web project; The directory must have either a root index.php file, an html directory or an index.html file"
 	echo "It also changes read-write perms of all folders with 'upload' in them to 777"
 	echo ""
 	echo "required arguments:"
@@ -11,6 +11,7 @@ show_help() {
 	echo ""
 	echo "optional arguments:"
 	echo "-h, --help           show this help message and exit"
+	echo "LOGIN                the system username to use with the command user:group change -- it is especially useful when running the script in sudo mode"
 	exit 0
 }
 
