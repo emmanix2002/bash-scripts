@@ -45,8 +45,8 @@ set_permissions() {
 		#specifically for upload directories -- changes permissions on all directories with upload in their name
 		find . -type d -path "*/tmp" -exec chmod -R 770 {} \;
 		# for temporary directories -- if found
-		find . -type d -path "*/smarty_tpls/cache" -exec chmod -R 777 {} \;
-		find . -type d -path "*/smarty_tpls/templates_c" -exec chmod -R 777 {} \;
+		find . -type d -path "*/smarty*/cache" -exec chmod -R 777 {} \;
+		find . -type d -path "*/smarty*/templates_c" -exec chmod -R 777 {} \;
 		find . -type d -path "*/views/cache" -exec chmod -R 777 {} \;
                 find . -type d -path "*/views/templates_c" -exec chmod -R 777 {} \;
 		#specifically set the permissions on smarty/views folders
