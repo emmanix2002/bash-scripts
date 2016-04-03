@@ -47,7 +47,9 @@ set_permissions() {
 		# for temporary directories -- if found
 		find . -type d -path "*/smarty_tpls/cache" -exec chmod -R 777 {} \;
 		find . -type d -path "*/smarty_tpls/templates_c" -exec chmod -R 777 {} \;
-		#specifically set the permissions on smarty folders
+		find . -type d -path "*/views/cache" -exec chmod -R 777 {} \;
+                find . -type d -path "*/views/templates_c" -exec chmod -R 777 {} \;
+		#specifically set the permissions on smarty/views folders
 	else
 		echo "This doesn't seem to be the root of a project -- Exiting..."
 		exit 1
