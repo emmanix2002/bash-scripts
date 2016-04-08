@@ -39,6 +39,7 @@ set_permissions() {
 		chown -R $username:www-data .
 		echo "Changing file and directory permissions..."
 		find . -type f -exec chmod 644 {} \;
+		find . -type f -name '*.sh' -exec chmod +x {} \;
 		find . -type d -exec chmod 755 {} \;
 
 		find . -type d -name "*upload*" -exec chmod -R 777 {} \;
