@@ -33,7 +33,7 @@ set_permissions() {
 		cd $app_directory
 	fi
 	html_directories=$(find . -type d -path "*html" | wc -l)
-	if [[ -f "./index.php" || -f "./index.html" || -d "./html" || $html_directories -gt 0 ]]; then
+	if [[ -f "./index.php" || -f "./index.html" || -d "./public" || -d "./html" || $html_directories -gt 0 ]]; then
 		# it's a project's web root
 		echo "Changing ownership..."
 		chown -R $username:www-data .
@@ -49,8 +49,11 @@ set_permissions() {
 		find . -type d -path "*/smarty*/cache" -exec chmod -R 777 {} \;
 		find . -type d -path "*/smarty*/templates_c" -exec chmod -R 777 {} \;
 		find . -type d -path "*/views/cache" -exec chmod -R 777 {} \;
-                find . -type d -path "*/views/templates_c" -exec chmod -R 777 {} \;
+        find . -type d -path "*/views/templates_c" -exec chmod -R 777 {} \;
 		#specifically set the permissions on smarty/views folders
+		
+		#if the person is using composer, we'll need to make bin files executable
+		find . -type f -path "*/vendor/*/bin/*" -exec chmod +x {} \;
 	else
 		echo "This doesn't seem to be the root of a project -- Exiting..."
 		exit 1
