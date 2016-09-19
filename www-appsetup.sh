@@ -33,7 +33,7 @@ set_permissions() {
 		cd $app_directory
 	fi
 	html_directories=$(find . -type d -path "*html" | wc -l)
-	if [[ -f "./index.php" || -f "./index.html" || -d "./public" || -d "./html" || $html_directories -gt 0 ]]; then
+	if [[ -f "./index.php" || -f "./index.html" || -d "./public" || -d "./html" || -d "./web" || $html_directories -gt 0 ]]; then
 		# it's a project's web root
 		echo "Changing ownership..."
 		chown -R $username:www-data .
